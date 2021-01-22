@@ -3,7 +3,7 @@
 #Packages used
 library(dplyr)
 library(ggplot2)
-data <- read.csv('~/fusion_GLOBAL_DATAFLOW_UNICEF_1.0_all.csv')
+data <- read.csv('fusion_GLOBAL_DATAFLOW_UNICEF_1.0_all.csv')
 
 #North and South american country list
 north_am <- c('United States', 'Mexico', 'Canada', 'Guatamala', 'Cuba', 'Haiti', 
