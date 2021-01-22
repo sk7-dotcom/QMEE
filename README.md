@@ -13,3 +13,8 @@ Biological question:
 Considering the vast differences in climate, infectious diseases and healthcare facilities in North and South America I hypothesized that the infant mortality rate in South America would be significantly higher then in North America. I studied this here briefly looking at UNICEF data on this subject to understand whether there is a difference and how this statistic had changed since the 1950s.  
 
 From this analysis, it would suggest the deaths per 1000 live births has fallen drastically since the 1950s across both continents. Although there was a vast disparity in infant mortality from the 1960s to around 2010, the numbers have become more even across the two continents since.
+
+Other questions to consider:
+
+1. Does the disparty in infant mortality extend into child mortality?
+2. What are the contributing factors that have caused the more recent stabilization in the Mortality Rate? (i.e. vaccines, pre- and post- natal care etc) 
