@@ -3,6 +3,9 @@
 #Packages used
 library(dplyr)
 library(ggplot2)
+
+## JD: The thing to do is to provide information how to download the data, not 
+## revision track somebody else's giant data file.
 data <- read.csv('fusion_GLOBAL_DATAFLOW_UNICEF_1.0_all.csv')
 
 ## JD: Better to put information in tables and save code for code
@@ -58,3 +61,5 @@ ggplot(total, aes(as.numeric(TIME_PERIOD), mean, color = Continents)) + geom_jit
 ## Use summary() to visualize your regression results
 summary(lm(mean ~ as.numeric(TIME_PERIOD), data = north_sum))
 summary(lm(mean ~ as.numeric(TIME_PERIOD), data = south_sum))
+
+## Grade 2.2/3. Nice exploration.
