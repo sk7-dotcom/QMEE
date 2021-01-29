@@ -62,4 +62,4 @@ ggplot(total, aes(as.numeric(TIME_PERIOD), mean, color = Continents)) + geom_jit
 summary(lm(mean ~ as.numeric(TIME_PERIOD), data = north_sum))
 summary(lm(mean ~ as.numeric(TIME_PERIOD), data = south_sum))
 
-## Grade 2.2/3 = ~A Nice exploration.
+## Grade 2.2/3. Nice exploration.

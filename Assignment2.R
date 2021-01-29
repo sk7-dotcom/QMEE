@@ -134,7 +134,7 @@ pdf('Africa_AIDS_2000_2019.pdf')
 ggplot(death_AIDS_sum, aes(as.numeric(TIME_PERIOD), death_AIDS, color = Geographic.area)) + 
   geom_jitter() + xlab('Years') + 
   ylab('Est. no. of deaths from AIDS (per 100,000 people)')
-def.off()
+dev.off()
 #Middle-East and and North Africa data is missing for AIDS deaths in the 15-25 range, 
 #but this is not preventing code from running so I have ignored this warning for now. 
 #May redo AIDS data with new indicator and smaller age group for next week.
