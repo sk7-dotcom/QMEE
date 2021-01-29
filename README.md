@@ -18,3 +18,25 @@ Other questions to consider:
 
 1. Does the disparty in infant mortality extend into child mortality?
 2. What are the contributing factors that have caused the more recent stabilization in the Mortality Rate? (i.e. vaccines, pre- and post- natal care etc) 
+
+_____________
+
+Assignment#2 Prompt:
+
+1. Examine the structure of the data you imported
+2. Examine the data for mistakes, and to make sure you understand the R classes
+3. Make one or two plots that might help you see whether your data have any errors or anomalies
+4. Describe what sort of investigations you might do with your data, and how you might break your project into replicable components: save      this in your repo as a file called README.md
+5. Make sure you know how to use source, save and load in R: finish a task, and then close R without saving your workspace and efficiently       redo the task.
+
+# HIV and AIDS over 20 years 
+
+Potential questions:
+
+1. How have the number of people living with HIV changed over 20 years? 
+2. Where are the majority of HIV positive individuals located on the African continent? 
+3. Has there been an increase in AIDS related deaths in the recent years? 
+
+From my data management so far, the major steps seem to include some QC to make sure the data is not missing anything fundamental, 
+a lot of data clean up, to make tibbles that are more appropriate for plotting (this seems to be challenging the first time and subsequently more repetitive and finally something I have not done much of is statistical analysis to see if the data generated is significant and meaningful. 
+
