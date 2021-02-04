@@ -6,6 +6,16 @@ library(ggplot2)
 
 #Data downloaded from UNICEF: https://data.unicef.org/dv_index/ ----
 data <- read.csv('fusion_GLOBAL_DATAFLOW_UNICEF_1.0_all.csv')
+## BMB: 'data' is not the best name for data (matches a built-in function)
+## if you're going to work with big(ish) data, readr::read_csv(), also
+## data.table::fread (and the vroom package) are faster.  In this case 1 vs 4 secs
+## doesn't really matter
+
+if (FALSE) {
+    system.time(read.csv('fusion_GLOBAL_DATAFLOW_UNICEF_1.0_all.csv')) ## 3.8 secs
+    system.time(readr::read_csv('fusion_GLOBAL_DATAFLOW_UNICEF_1.0_all.csv')) ## 1.9 secs
+    system.time(data.table::fread('fusion_GLOBAL_DATAFLOW_UNICEF_1.0_all.csv')) ## 1 secs
+}
 
 #Country based grouping code can be found in Country_List_Generator.R
 africa_all <- read.csv('Africa.csv')
@@ -32,10 +42,15 @@ data %>%
 #not all the different are providing information.
 #This subset will only include the HIV and AIDS data for people under 25 living in 
 #one of the four African sub-regions identified from the last search. 
-#I will do quality check at that level for more clarity. 
+#I will do quality check at that level for more clarity.
+
+## BMB: numeric -> character may be because of 'missing' values coded as character,
+## not recognized by R.  You can specify col types when reading in data ...
 
 
 #People living with HIV under 25 ----
+
+## BMB: what is grouping by time period being used for here?
 live_HIV_c <- data %>% 
   group_by(TIME_PERIOD)%>% 
   filter(Indicator == 'Estimated number of children (aged 0-19 years) living with HIV', 
@@ -49,6 +64,8 @@ live_HIV_y <- data %>%
   select(TIME_PERIOD, OBS_VALUE, Geographic.area)
 
 live_HIV <- rbind(live_HIV_c, live_HIV_y)
+
+## BMB why not Indicator %in% c("...", "...") to get both at once?
 
 #Average across all years 
 live_HIV_sum <- live_HIV %>% 
@@ -108,8 +125,10 @@ summary(HIV_AIDS_data)
 #All numeric data is no longer a character, so there is some more meaning in this 
 #summary.
 HIV_AIDS_data %>%
-  group_by(TIME_PERIOD) %>%
-  summarize(count = n())
+    group_by(TIME_PERIOD) %>%
+    summarize(count = n()) %>%
+    ## BMB: this checks automatically ...
+    pull(count) %>% all(.==4)
 #Count across 20 years all have 4 observations as expected. 
 
 HIV_AIDS_data %>%
@@ -121,14 +140,16 @@ death_AIDS_sum %>%
   group_by(Geographic.area) %>%
   summarise(NA_per_row = sum(is.na(death_AIDS))) %>%
   arrange(desc(NA_per_row))
-#Middle Ease and North Africa does not seem to collect AIDS data. Will not 
+#Middle East and North Africa does not seem to collect AIDS data. Will not 
 #convert to 0 because in this it will be misleading. 
 
 #Initial Plots ----
 
 ggplot(HIV_AIDS_data, aes(as.numeric(TIME_PERIOD), new_HIV, color = Geographic.area)) + 
   geom_jitter() + scale_y_log10() + xlab('Years') + 
-  ylab('Est. no. of new HIV infections in individuals under 25')
+    ylab('Est. no. of new HIV infections in individuals under 25')
+
+## BMB: why jitter? why points and not lines?
 
 pdf('Africa_AIDS_2000_2019.pdf')
 ggplot(death_AIDS_sum, aes(as.numeric(TIME_PERIOD), death_AIDS, color = Geographic.area)) + 
@@ -139,4 +160,6 @@ dev.off()
 #but this is not preventing code from running so I have ignored this warning for now. 
 #May redo AIDS data with new indicator and smaller age group for next week.
 
+## BMB: nice job. There are a few more tricks to learn, but this is good.
+## Grade: 2.2/3
 
