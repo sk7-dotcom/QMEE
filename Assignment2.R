@@ -117,7 +117,8 @@ death_AIDS_sum <- death_AIDS %>%
 
 HIV_AIDS_data <- new_HIV_sum %>%
   inner_join(live_HIV_sum, by = c('TIME_PERIOD', 'Geographic.area'))
-  
+
+write.csv(HIV_AIDS_data, file ="HIV_AIDS.csv", row.names=FALSE)
 
 #Data Check #2: ----
 

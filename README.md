@@ -40,3 +40,21 @@ Potential questions:
 From my data management so far, the major steps seem to include some QC to make sure the data is not missing anything fundamental, 
 a lot of data clean up, to make tibbles that are more appropriate for plotting (this seems to be challenging the first time and subsequently more repetitive and finally something I have not done much of is statistical analysis to see if the data generated is significant and meaningful. 
 
+_____________
+
+Assignment#3 Prompt: 
+
+1. Construct some (i.e., more than one) ggplots using your data. (If you already made one for a previous           assignment, try making another.) 
+2. Discuss:
+   what you are trying to show
+   some of the choices that you have made
+   the basis for these choices (e.g., Cleveland hierarchy, proximity of comparisons, or other principles of        graphical communication)
+
+For this assignment I delved once again into HIV and AIDS data from Africa to learn more about the changes in infections and deaths over time. I started with a modified plot from last week where I found that over time sub-Saharan Africa, Eastern and Southern Africa have shown the greatest decrease in new and existing HIV infections. They still have the highest infection compared to the continent, but their trend was most dramatic.
+
+To look deeper into the specific countries that have driven this shift in Easter and Southern Africa, I looked at country level data in the second plot. Instead of having HIV data on the x and y axis, I created a new/existing HIV ratio to make the numeric aspect of the plot only exist on the y-axis for easy reading. Here is it clear that Madagascar was having a hard time in 2010 but has since gotten better in new HIV infections. Mauritius had the steepest drop till 2007 where the numbers started to tread upwards again. South Africa has also seen a steady drop in cases over time. 
+
+To understand how this has affected AIDS related death in these countries, I looked into AIDS-related death in two age groups 0-14 and 15-25. This plot was particularly informative about backward trends based on age group. EG. in Madagascar, the number of AIDS related deaths has stays the same for 15 years, but the number of deaths in the 0-14 age group is on the rise. The situation is similar in Angola where death is on the rise in the youngest category. 
+
+(Visual Graphic comments embedded in code)
+

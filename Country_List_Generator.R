@@ -21,7 +21,10 @@ Africa_list <- data.frame(Africa)
 write.csv(Africa, file ="Africa.csv", row.names=FALSE)
 
 #Sample
-country_list <- c()
+ES_Africa<- c('Angola','Botswana','Comoros','Djibouti','Eritrea','Ethiopia',
+              'Kenya','Lesotho','Madagascar','Malawi','Mauritius','Mozambique',
+              'Namibia', 'Reunion','Rwanda', 'Seychelles', 'Somalia', 'South Africa',
+              'Sudan','Swaziland','Tanzania','Uganda','Zambia','Zimbabwe')
 
-countries <- data.frame(country_list)
-write.csv(countries, file ="countries.csv", row.names=FALSE)
+ES_Africa <- data.frame(ES_Africa)
+write.csv(ES_Africa, file ="ES_Africa.csv", row.names=FALSE)
