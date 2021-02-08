@@ -2,6 +2,7 @@
 
 #Packages Used ----
 library(ggplot2)
+library(dplyr)
 
 #Data downloaded from UNICEF: https://data.unicef.org/dv_index/ ----
 Total_data <- read.csv('fusion_GLOBAL_DATAFLOW_UNICEF_1.0_all.csv')
