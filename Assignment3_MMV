@@ -1,0 +1,44 @@
+#Assignment 3 2021/02/12
+
+MMV is a viral infection that can cause a serious disease (called MMD)
+
+MMD patients are unable to control their natural urge to make mathematical models 
+that attempt to describe biological phenomena
+
+The rapid MMV test gives a positive result:
+
+100% of the time for people with the virus
+
+5% of the time for people without the virus
+
+A certain population has a prevalence of 1%
+
+You pick a person from this population at random, and test them, and the test is 
+positive.
+
+What is the probability that they have MMV?
+You learn that your friend has a positive rapid test for MMV. What do you tell 
+them?
+
+
+________________________________________________________________________________
+
+#Definitions 
+Positive for Virus: PV
+Positive for Test: PT
+Alternative: nPV or nPT
+
+#Final Answer
+Based of the data above there are four numbers to be considered:
+
+1. Prob of PV and PT: 0.01*1 = 0.01
+2. Prob of PV and nPT: 0.99*0 = 0
+3. Prob of nPV and PT = 0.99*0.05 = 0.05
+4. Prob of nPV and nPT = 0.99*0.95 = 0.94
+
+Since we know that the test is positive in our example:
+
+Prob of PV becomes: 0.01/(0.01+0.05) = 0.17 
+
+I would tell this friend that since he tested positive for the test, there is a 
+17% chance that he has actually got the MMV. 
