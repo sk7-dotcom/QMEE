@@ -44,6 +44,8 @@ _____________
 
 Assignment#3 Prompt: 
 
+JD: I really like this project, but the visualizations need work.
+
 1. Construct some (i.e., more than one) ggplots using your data. (If you already made one for a previous           assignment, try making another.) 
 2. Discuss:
    what you are trying to show
@@ -52,9 +54,17 @@ Assignment#3 Prompt:
 
 For this assignment I delved once again into HIV and AIDS data from Africa to learn more about the changes in infections and deaths over time. I started with a modified plot from last week where I found that over time sub-Saharan Africa, Eastern and Southern Africa have shown the greatest decrease in new and existing HIV infections. They still have the highest infection compared to the continent, but their trend was most dramatic.
 
+JD: I like the idea of the time courses that you show (it is called a phase plot when you make time implicit in the xy-plane like that). I don't think size is a good choice for indicating the direction of time, though, and certainly the size range of your points is too large. It reads (and the plot looks) like you're not aware the sub-Saharan Africa is not a separate place, but instead the sum of your first and last categories. The legend is alphabetical, which should almost always be avoided, but seems particularly bad when you have this sort of structure (the third is the sum of the first and fourth). Nothing at all can be seen of North Africa: did you try plotting these data on a log scale?
+
 To look deeper into the specific countries that have driven this shift in Easter and Southern Africa, I looked at country level data in the second plot. Instead of having HIV data on the x and y axis, I created a new/existing HIV ratio to make the numeric aspect of the plot only exist on the y-axis for easy reading. Here is it clear that Madagascar was having a hard time in 2010 but has since gotten better in new HIV infections. Mauritius had the steepest drop till 2007 where the numbers started to tread upwards again. South Africa has also seen a steady drop in cases over time. 
 
+JD: This is a cool idea, but is hard to interpret without looking at how much HIV is in each of these countries (and how the measurements are being done). The ratio could go down if a country reassessed and found it had more old cases than it thought, for example. Madagascar has quite few cases (as we learn on the next page), and the instabilities you see may be methodological problems.
+
 To understand how this has affected AIDS related death in these countries, I looked into AIDS-related death in two age groups 0-14 and 15-25. This plot was particularly informative about backward trends based on age group. EG. in Madagascar, the number of AIDS related deaths has stays the same for 15 years, but the number of deaths in the 0-14 age group is on the rise. The situation is similar in Angola where death is on the rise in the youngest category. 
+
+JD: This seems like not a good way of conveying visual information, with color representing time. Countries are again in alphabetical order (but reversed visually from the previous plot). The panel titles are misleading (because most of the words can't be seen).
+
+Grade 1.8/3
 
 (Visual Graphic comments embedded in code)
 
