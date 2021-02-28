@@ -83,3 +83,28 @@ I hypothesize that in Mauritius and Madagascar, the increase or decrease in new 
 
 Grade: 2.1/3
 
+___________________________
+
+Assignment # 5
+
+-> Formulate two different hypotheses about your data, and describe how you would test them with two different permutation tests. Challenge yourself to come up with conceptually different tests, if this is reasonable for your data set.
+
+-> Implement one or both of these tests in R. You can use permutation, or you can use a classic test if you explain clearly how it corresponds to a permutation test. Best would be to use both.
+
+Was hard to do permutations on HIV data so I used some data from my lab. This experiment was testing what the effect of knocking out antigen presentation would have on tumor progression when mice were treated with an Oncolytic Virus vs a PBS control. The experiment had WT mice treated with Vaccinia and PBS as well as KO mice treated with Vaccinia (Vaccinia) and PBS. For the sake of this permutation, I will compare across groups on a single day or between Day 1 and Day 10. (typically when mice reach endpoint or are tumor free) 
+
+Hypothesis 1# Since we expect the antigen-presentation deficient model to do worse in the context of cancer progression, I hypothesize that the mean tumor size is bigger on Day 10 in KO mice compared to WT mice treated with Vaccinia. 
+
+Hypothesis 2# Since we expect WT mice treated with the Oncolytic Virus to have a smaller tumor than those that were treated with PBS, the second hypothesis is that the mean tumor size on Day 10 for PBS treatment is bigger than Day 10 for Vaccinia treatment. 
+
+I have analyzed the two hypothesis with a classical permutation test written through a for loop because the sample size was small enough. I will systematically change the tumor size values in each hypothesis while keeping the groups constant and test the hypotheses by looking at the distributions of the difference in the mean between the two groups. I will assess the significance of the difference in the means by calculating the number of permutations of the data that were >= to the real mean and divide that by all the possibilities. The will also run a t-test for comparison. 
+
+Results: 
+
+Hypothesis 1: Totally opposite to our prediction, the tumors regressed faster in the KO mice than then WT mice, with the mean tumor size being larger in the WT. Biologically this points to as issue with the model either due to an unintended KO of another gene or something else.Additionally, the two tailed p-value associated with the difference in means was 0.22 when calculated by the classical permutation test and 0.25 with the t.test, both of which are bigger than 0.05. 
+
+Hypothesis 2: The mean tumor size for the Oncolytic virus treatment group was almost half the size of the PBS treated group, however, the p-value from the permutation test was 0.23 and the t.test was 0.21. This could be a product of the small number of replicates. We cannot reject the null hypothesis, but we might be on the right tract w.r.t. the biology. 
+
+
+
+
