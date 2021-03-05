@@ -14,8 +14,7 @@ south_am <- c('Brazil', 'Colombia', 'Argentina', 'Peru', 'Venezuela (Bolivarian 
 south_am <- data.frame(south_am)
 write.csv(south_am, file ="south_am.csv", row.names=FALSE)
 
-Africa <- c('West and Central Africa', 'Middle East and North Africa', 'sub-Saharan Africa', 
-            'Eastern and Southern Africa')
+Africa <- c('West and Central Africa', 'Middle East and North Africa', 'Eastern and Southern Africa')
 
 Africa_list <- data.frame(Africa)
 write.csv(Africa, file ="Africa.csv", row.names=FALSE)
