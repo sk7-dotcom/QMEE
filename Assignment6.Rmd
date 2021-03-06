@@ -3,8 +3,10 @@ title: "Assignment 6"
 author: "Sreedevi Kesavan"
 date: "05/03/2021"
 output:
-  html_document: default
-  pdf_document: default
+  html_document:
+    df_print: paged
+  md_document:
+    variant: markdown_github
 ---
 
 ```{r setup, include=FALSE}
