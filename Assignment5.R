@@ -30,6 +30,7 @@ obs <- mean(DATA$Tumor_Size[DATA$Group=="WT"])-
 res <- c(res,obs) #add to the possibilities
 
 
+## JD: Taking the absolute value is OK, but it's usually better to figure out which tail you're in, calculate that tail, and double it.
 p_val_perm <- mean(abs(res)>=abs(obs)); abs(obs); p_val_perm #p-val for obs
 
 hist(res,col="gray",las=1,main="")
@@ -65,6 +66,6 @@ p_val_perm <- mean(abs(res)>=abs(obs)); abs(obs); p_val_perm #p-val for obs
 hist(res,col="gray",las=1,main="")
 abline(v=obs,col="red")
 
-
-
 p_val_t <- t.test(Tumor_Size_2~Group_2,data=DATA_2,var.equal=TRUE); p_val_t
+
+## Grade 2.0/3

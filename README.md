@@ -103,8 +103,11 @@ Results:
 
 Hypothesis 1: Totally opposite to our prediction, the tumors regressed faster in the KO mice than then WT mice, with the mean tumor size being larger in the WT. Biologically this points to as issue with the model either due to an unintended KO of another gene or something else.Additionally, the two tailed p-value associated with the difference in means was 0.22 when calculated by the classical permutation test and 0.25 with the t.test, both of which are bigger than 0.05. 
 
+JD: So this is not totally opposite your prediction; the standard is that if P > 0.05 you haven't seen clearly which group is really regressing faster.
+
 Hypothesis 2: The mean tumor size for the Oncolytic virus treatment group was almost half the size of the PBS treated group, however, the p-value from the permutation test was 0.23 and the t.test was 0.21. This could be a product of the small number of replicates. We cannot reject the null hypothesis, but we might be on the right tract w.r.t. the biology. 
 
+JD: Maybe, but again you haven't seen clearly. The reason we have statistical standards is that this sort of reasoning can be dangerous
 
 
 
