@@ -3,8 +3,6 @@ title: "Assignment 6"
 author: "Sreedevi Kesavan"
 date: "05/03/2021"
 output:
-  html_document:
-    df_print: paged
   md_document:
     variant: markdown_github
 ---
@@ -40,14 +38,14 @@ I used the tidyverse to clean up the relevant data from the total dataset. I hav
 HIV_AIDS_S <- data %>% 
   filter(Geographic.area %in% Countries, Indicator == 'Estimated number of new HIV infections (children aged 0-19 years)', Sex == c('Male', 'Female')) %>%
   mutate(TIME_PERIOD = as.numeric(TIME_PERIOD), OBS_VALUE = as.numeric(OBS_VALUE)) %>%
-  filter(TIME_PERIOD >=2006) %>%
+  filter(TIME_PERIOD >=2005) %>%
   group_by(TIME_PERIOD, Sex) %>%
   summarise(new_HIV = mean(OBS_VALUE, na.rm = TRUE)) 
 
 HIV_AIDS <- data %>% 
   filter(Geographic.area %in% Countries, Indicator == 'Estimated number of new HIV infections (children aged 0-19 years)', Sex == c('Total')) %>%
   mutate(TIME_PERIOD = as.numeric(TIME_PERIOD), OBS_VALUE = as.numeric(OBS_VALUE)) %>%
-  filter(TIME_PERIOD >=2006) %>%
+  filter(TIME_PERIOD >=2005) %>%
   group_by(TIME_PERIOD) %>%
   summarise(new_HIV = mean(OBS_VALUE, na.rm = TRUE)) 
 
@@ -55,7 +53,7 @@ M_to_C <- data %>%
   filter(Indicator == 'Mother-to-child HIV transmission rate', 
          Geographic.area %in% Countries) %>% 
   mutate(TIME_PERIOD = as.numeric(TIME_PERIOD), OBS_VALUE = as.numeric(OBS_VALUE)) %>%
-  filter(TIME_PERIOD >=2006) %>%
+  filter(TIME_PERIOD >=2005) %>%
   group_by(TIME_PERIOD) %>%
   summarise(M_to_C = mean(OBS_VALUE, na.rm = TRUE)) 
   
