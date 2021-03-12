@@ -1,4 +1,5 @@
-### Modelling trends in New HIV Cases and the Mother to Child transmission rate in Easter africa using GLMs
+Modelling trends in New HIV Cases and the Mother to Child transmission rate in Easter Africa using GLMs
+-------------------------------------------------------------------------------------------------------
 
 Last day we that new HIV infections can be correlated to the increase in
 mother-baby transmission i.e. as the mother to child transmission rate
@@ -28,22 +29,23 @@ Plot_ready_S <- read.csv('Cor_data_Sew.csv')
 
 I have not shown the data handling again this week, the final tables
 from last week have been imported for the purposes of his exercise.
-\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ \#\#\#\# Initial Diagnostic
+
+### Initial Diagnostics
 
 ``` r
 m1 <- lm(new_HIV~ M_to_C, data=Plot_ready)
 #Plot
-m2 <- plot(m1, id.n=4)
+p2 <- plot(m1, id.n=4)
 ```
 
-![](Assignment7_files/figure-markdown_github/facet%20plots%20m2-1.png)![](Assignment7_files/figure-markdown_github/facet%20plots%20m2-2.png)![](Assignment7_files/figure-markdown_github/facet%20plots%20m2-3.png)![](Assignment7_files/figure-markdown_github/facet%20plots%20m2-4.png)
+![](Assignment7_files/figure-markdown_github/p2-1.png)![](Assignment7_files/figure-markdown_github/p2-2.png)![](Assignment7_files/figure-markdown_github/p2-3.png)![](Assignment7_files/figure-markdown_github/p2-4.png)
 
 ``` r
 m3 <- shapiro.test(Plot_ready$new_HIV) # W = 0.87212, p-value = 0.01281
 m4 <- shapiro.test(Plot_ready$M_to_C)  # W = 0.88695, p-value = 0.02364
 ```
 
-##### Diagnostic Plots
+### Final Diagnostics
 
 The biggest issue with the Initial Diagnostic seen above is the residual
 vs fitted plot clearly suggests a non-linear fit. The sharpiro test on
@@ -64,9 +66,9 @@ m1 <- glm(new_HIV~poly(M_to_C, 2),Plot_ready,family=gaussian(link = "identity"))
 m2 <- plot(m1, id.n=4)
 ```
 
-![](Assignment7_files/figure-markdown_github/m2%20facet%20plots-1.png)![](Assignment7_files/figure-markdown_github/m2%20facet%20plots-2.png)![](Assignment7_files/figure-markdown_github/m2%20facet%20plots-3.png)![](Assignment7_files/figure-markdown_github/m2%20facet%20plots-4.png)
+![](Assignment7_files/figure-markdown_github/m2-1.png)![](Assignment7_files/figure-markdown_github/m2-2.png)![](Assignment7_files/figure-markdown_github/m2-3.png)![](Assignment7_files/figure-markdown_github/m2-4.png)
 
-##### Final Model
+### Final Model
 
 ``` r
 plot <- ggplot(Plot_ready, aes(M_to_C, new_HIV)) + 
@@ -78,7 +80,7 @@ plot <- ggplot(Plot_ready, aes(M_to_C, new_HIV)) +
 
 ![](Assignment7_files/figure-markdown_github/plot-1.png)
 
-##### Comapring Males to Females using emmeans
+### Comapring Males to Females using emmeans
 
 To study whether there is a difference in the correlation above w.r.t.
 Sex, I used the emmeans package and took into account sex based
