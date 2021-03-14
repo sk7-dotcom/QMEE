@@ -24,6 +24,8 @@ library(emmeans)
 
 This data has been downloaded from <https://data.unicef.org/dv_index/>
 
+**BMB: you would benefit from using `readr::read_csv()` or `data.table::fread()` to
+read large CSV files (or read them and store them as R-format (rds/rda) files)
 
 ```{r, results = 'hide', warning=FALSE, message=FALSE}
 data <- read.csv('fusion_GLOBAL_DATAFLOW_UNICEF_1.0_all.csv')
@@ -31,7 +33,7 @@ ES_Africa <- read.csv('ES_Africa.csv')
 Countries <- ES_Africa[,1]
 ```
 
-I used the tidyverse to clean up the relevant data from the total dataset. I have created two final tibbles for the two analyses to follow. From previous work with this dataset, we know that there are some countries withint the larger set that have not collected data for certain indicators and I have excluded them below. 
+I used the tidyverse to clean up the relevant data from the total dataset. I have created two final tibbles for the two analyses to follow. From previous work with this dataset, we know that there are some countries within the larger set that have not collected data for certain indicators and I have excluded them below. 
 
 ```{r, results = 'hide', warning=FALSE, message=FALSE}
 #Data clean-up ----
@@ -64,17 +66,23 @@ Plot_ready_S <- HIV_AIDS_S %>%
   inner_join(M_to_C, by = c('TIME_PERIOD'))
 ```
 
+**BMB:** this is good but you should try to deal with the warning messages. They look harmless but harmless warning messages get you in the habit of ignoring or overlooking important ones.
+
 ##### Diagnostic Plots
 
-To start the analysis, I have drawn four diagnostic plots to assess the linearity, normality, homoscedasticity and any influencial outliers in the data. 
+To start the analysis, I have drawn four diagnostic plots to assess the linearity, normality, homoscedasticity and any influential outliers in the data. 
 
 *Plot 1 (Residuals vs Fitted)*
 
 There is a tendency towards non-linearity in this data as indicated by the slightly bend to the line here. This actually got worse when data was transformed, so for the moment I did not alter anything to address this plot. 
 
+** BMB** I would judge this as pretty bad (it is not driven by a single point, but by the whole shape of the data set).  I would try adding a quadratic term to the model
+
 *Plot 2 (Normal QQ)*
 
-This plot seems to suggest a relatively normal distribution, there are some strays on the top end. To address this, I performed a Sharpiro-Wink test and and both p-values were > 0.05. We can reject the alternate hypothesis that the data is not normally distributed, this does not mean that it is therefore normally distributed but perhaps we don't need to worry yet about the implications on the model as much.  
+This plot seems to suggest a relatively normal distribution, there are some strays on the top end. To address this, I performed a Shapiro-Wilk test and and both p-values were > 0.05. We can reject the alternate hypothesis that the data is not normally distributed, this does not mean that it is therefore normally distributed but perhaps we don't need to worry yet about the implications on the model as much.  
+
+**BMB**: we **cannot** reject that alternative hypothesis. That's not how significance tests work, except in very special cases. All we can do is fail to reject the null hypothesis. I wouldn't worry about this level of deviation: in any case, you should never worry about Normality until you have addressed the other potential issues (especially, non-linearity)
 
 *Plot 3 (Scale-Location)*
 
@@ -83,6 +91,8 @@ The line seems to skew left since, 3 out of 4 residuals are on one side, suggest
 *Plot 4 (Residuals vs Leverage)*
 
 The large majority of points seem to be outside the range of Cook's distance, but one point seems to be beyond Cook's distance. After looking into the data it is the most recent point from 2019. One could make the argument for old data, but excluding this point to improve these graphs is not an option. 
+
+**BMB**: it is marked '1' 
 
 ```{r m2}
 #Diagnostic Test ----
@@ -95,6 +105,15 @@ m2 <- plot(m1, id.n=4)
 #shapiro.test(Plot_ready$M_to_C) # => p = 0.08411
 ```
 
+**BMB**: It can really help to look at the predictions as well as the residuals
+
+```{r}
+(ggplot(Plot_ready, aes(M_to_C,new_HIV))
+    + geom_point()
+    + geom_smooth(method="lm")
+    + geom_smooth(method="lm",formula=y~poly(x,2), colour="red")
+)
+```
 ##### Pearson-Correlation Plots
 
 To understand whether there is a positive correlation between Mother-to-child transmission rates and the number of new HIV cases, I plotted a scatter graph with pearson-correlation and the associated p-value. From this data there seems to be a clear positive correlation and a significant p-value associated with this data. This does suggest that we can reject the null hypothesis. 
@@ -108,15 +127,20 @@ plot <- ggscatter(Plot_ready, x = "M_to_C", y = "new_HIV",
 
 ```
 
-##### Comapring Males to Females using emmeans 
+**BMB**: correlation analysis is almost identical to regression analysis.
+
+##### Comparing Males to Females using emmeans 
 
 To study whether there is a difference in the correlation above w.r.t. Sex, I used the emmeans package and took into account sex based difference in the data. The lack of overlap with the confidence intervals around the two means alone indicate a significant different between the two groups, with the females being nearly double to that of the male data. 
 
 ```{r p}
 #emmeans pairwise comparison on the bases of sex ----
-
 lmboth <- lm(new_HIV~M_to_C + Sex, data=Plot_ready_S)
 e1 <- emmeans(lmboth, "Sex")
 p <- plot(e1); p
 ```
+
+**BMB**: non-overlap is not the best way to compare groups (it works but is sub-optimal)
+
+Grade: 2.1/3
 
