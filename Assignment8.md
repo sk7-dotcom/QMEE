@@ -121,13 +121,13 @@ jags1 <- jags(model.file='ass8.bug',
 
 ``` r
 mm <- as.mcmc.bugs(jags1$BUGSoutput)
-xyplot(mm,layout=c(2,3)) 
+print(xyplot(mm,layout=c(2,3)))
 ```
 
 ![](Assignment8_files/figure-markdown_github/unnamed-chunk-4-1.png)
 
 ``` r
-densityplot(mm,layout=c(2,3))
+print(densityplot(mm,layout=c(2,3)))
 ```
 
 ![](Assignment8_files/figure-markdown_github/unnamed-chunk-4-2.png)

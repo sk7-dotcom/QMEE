@@ -68,8 +68,8 @@ jags1 <- jags(model.file='ass8.bug',
               inits=NULL); jags1
 
 mm <- as.mcmc.bugs(jags1$BUGSoutput)
-xyplot(mm,layout=c(2,3)) 
-densityplot(mm,layout=c(2,3))
+print(xyplot(mm,layout=c(2,3)))
+print(densityplot(mm,layout=c(2,3)))
 
 print(dwplot(jags1)) 
 
