@@ -1,0 +1,10 @@
+model {
+  for (i in 1:N) {
+    new_HIV[i] ~ dnorm(pred[i], tau)
+    pred[i] <- mM_to_C*M_to_C[i]**2 + mM_to_C2*M_to_C[i] + int
+        }
+mM_to_C ~ dnorm(50, .0001)
+mM_to_C2 ~ dnorm(50, .0001)
+int ~ dnorm(20, .0001)
+tau ~ dgamma(.001, .001)
+}
