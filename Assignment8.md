@@ -7,9 +7,9 @@ continuous and discrete variables that did not break everything.
 #Packages Used ----
 library(dplyr)
 library(R2jags)
-library(emdbook)
 library(dotwhisker)
-library(emmeans)
+library(emdbook)
+library(lattice)
 ```
 
 I removed unnecessary columns from the data because the model was
@@ -120,13 +120,20 @@ jags1 <- jags(model.file='ass8.bug',
     ## DIC is an estimate of expected predictive error (lower deviance is better).
 
 ``` r
-mm <- as.mcmc.bugs(jags1$BUGSoutput); plot(mm)
+mm <- as.mcmc.bugs(jags1$BUGSoutput)
+xyplot(mm,layout=c(2,3)) 
 ```
 
 ![](Assignment8_files/figure-markdown_github/unnamed-chunk-4-1.png)
 
 ``` r
-print(dwplot(jags1)) 
+densityplot(mm,layout=c(2,3))
 ```
 
 ![](Assignment8_files/figure-markdown_github/unnamed-chunk-4-2.png)
+
+``` r
+print(dwplot(jags1)) 
+```
+
+![](Assignment8_files/figure-markdown_github/unnamed-chunk-4-3.png)
