@@ -10,7 +10,7 @@ output:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-For this assignment I have tried to re-create the #glm() assignment from two weeks ago using bayesien tools. I did not include the Male vs Female differences, because I was not able to find a way to combine continuous and discrete variables that did not break everything. 
+For this assignment I have tried to re-create the `glm()` assignment from two weeks ago using Bayesian tools. I did not include the Male vs Female differences, because I was not able to find a way to combine continuous and discrete variables that did not break everything. 
 ```{r results = 'hide', warning=FALSE, message=FALSE}
 #Packages Used ----
 library(dplyr)
@@ -19,7 +19,7 @@ library(dotwhisker)
 library(emdbook)
 library(lattice)
 ```
-I removed unnecessary columns from the data because the model was complaining a lot when I left them as is. I have re-analyzed the data using the frequentest approach below. 
+I removed unnecessary columns from the data because the model was complaining a lot when I left them as is. I have re-analyzed the data using the frequentist approach below. 
 
 ```{r}
 
