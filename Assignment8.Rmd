@@ -29,7 +29,8 @@ Plot_ready <- read.csv('Cor_data.csv')
 Plot_ready <- Plot_ready %>% 
   select(-X, -TIME_PERIOD)
   
-
+## BMB: glm with gaussian and identity link is identical to lm(); why not
+## just use lm() ... ?
 summary(glm(new_HIV~poly(M_to_C, 2),Plot_ready,family=gaussian(link = "identity")))
 ```
 
@@ -39,23 +40,40 @@ I kept the distributions as normal primarily because that was what I assumed whe
 
 ```{r echo=FALSE}
 # BUG FILE M_to_C ----
-
-# model {
-#   for (i in 1:N) {
-#     new_HIV[i] ~ dnorm(pred[i], tau)
-#     pred[i] <- mM_to_C*M_to_C[i]**2 + mM_to_C2*M_to_C[i] + int
-#         }
-# mM_to_C ~ dnorm(50, .0001)
-# mM_to_C2 ~ dnorm(50, .0001)
-# int ~ dnorm(20, .0001)
-# tau ~ dgamma(.001, .001)
-# }
-
+## BMB: you can cheat and preserve syntax highlighting: see ?R2jags::write.model
+function()  {
+   for (i in 1:N) {
+     new_HIV[i] ~ dnorm(pred[i], tau)
+     pred[i] <- mM_to_C*M_to_C[i]**2 + mM_to_C2*M_to_C[i] + int
+         }
+ mM_to_C ~ dnorm(50, .0001)
+ mM_to_C2 ~ dnorm(50, .0001)
+ int ~ dnorm(20, .0001)
+ tau ~ dgamma(.001, .001)
+}
 ```
 
-I ran the model with JAGS and plotted the #dotwhisker plot. Clearly the numbers don't match up well to the frequentest numbers from the start of this exercise. Perhaps my assumptions were too small? For a polynomial model like this one, I do wonder how one goes about plotting this the way the #geom_smooth() plots it to the dataset. 
+**BMB:**: why pick these means for the priors? (0 seems more neutral; do you have prior data?
+Note that the parameterization used by `poly()` (unless you specify `raw=TRUE`) will *not*
+be `b_0 + b_1*x + b_2*x^2`, but an *orthogonal polynomial* (harder to interpret but 
+numerically more stable)
 
-I am tempted to go back and change the priors, but I think that defeats the purpose of them being priors. If that is the case, I wonder what one is meant to do at this point. How can I improve upon this to make it more meaningful to my dataset. In this particular example I did not include other predictor variable, I suspect the number may be more fluid if there was more of those as well. 
+I ran the model with JAGS and plotted the `dotwhisker` plot. Clearly the numbers don't match up well to the frequentest numbers from the start of this exercise. Perhaps my assumptions were too small? For a polynomial model like this one, I do wonder how one goes about plotting this the way the `geom_smooth()` plots it to the dataset. 
+
+**BMB:** the difference in your fits is explained above (orthog polynomial vs raw polynomial)
+
+```{r cmp_fits}
+dd <- data.frame(x=1:3)
+## orthogonal
+zapsmall(model.matrix(~poly(x,2), data=dd))
+## raw
+model.matrix(~poly(x,2,raw=TRUE), data=dd)
+```
+
+
+I am tempted to go back and change the priors, but I think that defeats the purpose of them being priors. (**BMB**: indeed!) If that is the case, I wonder what one is meant to do at this point. How can I improve upon this to make it more meaningful to my dataset. In this particular example I did not include other predictor variable, I suspect the number may be more fluid if there was more of those as well. 
+
+**BMB**: in general if there is something wrong with your model, adjusting the priors is not the way to fix it (although it can help if your model is *mostly* OK but runs into numerical problems).
 
 ```{r warning=FALSE, message=FALSE}
 # R2jags model setup ----
@@ -68,11 +86,17 @@ jags1 <- jags(model.file='ass8.bug',
               inits=NULL); jags1
 
 mm <- as.mcmc.bugs(jags1$BUGSoutput)
+## BMB: not sure why the first value is weird (won't affect inference because
+## it's a single outlier, but messes up the plots)
+## drop first sample of each chain (using mm[] preserves class structure)
+mm[] <- lapply(mm, function(x) x[-1,])
 print(xyplot(mm,layout=c(2,3)))
 print(densityplot(mm,layout=c(2,3)))
 
 print(dwplot(jags1)) 
 
 ```
+
+**BMB**: grade 2: model is in fact wrong/weird but you did recognize it ...
 
 
