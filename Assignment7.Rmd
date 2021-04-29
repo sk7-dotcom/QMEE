@@ -11,6 +11,8 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+JD: This is cool, and a nice investigation – but you did not really do a glm! Gaussian with identity link is just an lm. The thing you improved was using poly instead of a linear fit. But (as we tried to explain) you can have a polynomial relationship in a plain lm (the model is a linear function of the parameters, not necessarily the input variables). Grade 2/3. Sorry for delay!
+
 ## Modelling trends in New HIV Cases and the Mother to Child transmission rate in Easter Africa using GLMs
 
 Last day we  that new HIV infections can be correlated to the increase in mother-baby transmission i.e. as the mother to child transmission rate increases the number of new HIV cases in young adults also increases. We ran a standard linear regression using the lm() function and although it seemed like a good fit based on the pearson correlation coefficient, the diagnostic plots suggested otherwise. For one the Residual vs Fitted plot clearly indicated that the data was not fitting a line. This week I am going back to that same data and using the glm() function testing to see if there are other models that would fit the data better and create cleaner diagnostic plots. To broaden the analysis I have decided to increase the scope of the data from 2005-2019 to 2000-2019. 
